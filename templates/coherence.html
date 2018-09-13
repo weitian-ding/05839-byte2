@@ -1,14 +1,13 @@
-<div class="page-header">
-    <h2>Is the data coherent?</h2>
-</div>
+<h2>Is the data coherent?</h2>
+<hr>
 
 <p>
     The dataset is coherent, we can look at some statistics for each column.
-    Wine price and rating are two numeric fields in the dataset (see table 2).
+    Wine price and ratings are two numeric fields in the dataset (see table 2).
     Wine price is highly skewed (see figure 8), while wine ratings follow a normal distribution
-    (see figure 9, here we see wine rating as a continuous random variable). We see that there are
+    (see figure 9, here we model wine rating as a continuous random variable). We see that there are
     high-end wines which are priced over $3,000 (see table 2), but this is still within a reasonable
-    price range. We can also examine wine variety.
+    price range.
 </p>
 
 <table class="table table-condensed">
@@ -91,65 +90,64 @@
     </tbody>
 </table>
 
+<hr>
+
 <div class="row">
 
     <div class="col-md-4">
         <figure class="figure">
+            <figcaption class="figure-caption">Figure 8: wine ratings Q-Q plot</figcaption>
             <div class="text-center">
                 <img src="img/ratings_qq.png" height="350" class="figure-img img-fluid"
                      alt="wine ratings Q-Q plot">
             </div>
-            <figcaption class="figure-caption">Figure 8: wine ratings Q-Q plot</figcaption>
         </figure>
     </div>
 
     <div class="col-md-8">
         <figure class="figure">
+            <figcaption class="figure-caption">Figure 9: wine price (<=$100) histogram</figcaption>
             <div class="text-center">
                 <img src="img/price_hist.png" height="350" class="figure-img img-fluid"
                      alt="wine price hist">
             </div>
-            <figcaption class="figure-caption">Figure 9: wine price (<=$100) histogram</figcaption>
         </figure>
     </div>
 </div>
 
-<hr>
-
 <p>
-    We count the number of reviews for each wine variety in
-    the dataset (see table 10), and we find that there are few wine varieties which contribute to the
+    We can also examine the categorical fields. We count the number of reviews for each wine variety in
+    the dataset (see table 2 above), and we find that there are few wine varieties which contribute to the
     bulk of wine reviews. We can illustrate this by plotting the number of wine reviews
-    for each variety in sorted by the number of wine reviews (see figure 10), we see a long-tailed
-    distribution. We can also do the same to the country where a wine is produced (see table *, figure 11),
-    and we find that most wine reviews are for American, French and Italian wine.
+    for each variety sorted by the number of wine reviews (see figure 10), we see a long-tailed
+    distribution. We can also do the same to the country where a wine is produced (see table 2 above and figure 11),
+    and we find that most wine reviews are for American, French and Italian wines.
 </p>
 
 <div class="row">
     <div class="col-md-6">
         <figure class="figure">
+            <figcaption class="figure-caption">Figure 10: number of reviews against wine variety
+            </figcaption>
             <div class="text-center">
                 <img src="img/variety_dist.png" width="100%" class="figure-img img-fluid"
                      alt="wine price hist">
             </div>
-            <figcaption class="figure-caption">Figure 10: number of reviews against wine variety
-            </figcaption>
         </figure>
     </div>
 
     <div class="col-md-6">
+
         <figure class="figure">
+            <figcaption class="figure-caption">Figure 11: number of reviews against wine country
+            </figcaption>
             <div class="text-center">
                 <img src="img/country_dist.png" width="100%" class="figure-img img-fluid"
                      alt="wine price hist">
             </div>
-            <figcaption class="figure-caption">Figure 11: number of reviews against wine country
-            </figcaption>
         </figure>
     </div>
 </div>
-
-<hr>
 
 <p>
     Next, we look at the actual text of wine reviews. Using word cloud, we see the frequently appearing
@@ -164,24 +162,22 @@
 <div class="row">
     <div class="col-md-6">
         <figure class="figure">
+            <figcaption class="figure-caption">Figure 12: word cloud wine description visualization</figcaption>
             <div class="text-center">
                 <img src="img/word_cloud.png"
                      class="figure-img img-fluid"
-                     height="400"
                      alt="wine price hist">
             </div>
-            <figcaption class="figure-caption">Figure 12: word cloud wine description visualization</figcaption>
         </figure>
     </div>
     <div class="col-md-6">
         <figure class="figure">
+            <figcaption class="figure-caption">Figure 13: review length histogram</figcaption>
             <div class="text-center">
                 <img src="img/review_wc_hist.png"
                      class="figure-img img-fluid"
-                     height="400"
                      alt="wine price hist">
             </div>
-            <figcaption class="figure-caption">Figure 13: review length histogram</figcaption>
         </figure>
     </div>
 </div>
@@ -189,12 +185,11 @@
 <hr>
 
 <figure class="figure">
+    <figcaption class="figure-caption">Figure 14: review length against wine ratings</figcaption>
     <div class="text-center">
         <img src="img/ratings_wc_box.png"
              class="figure-img img-fluid"
-             width="80%"
              alt="wine price hist">
     </div>
-    <figcaption class="figure-caption">Figure 14: review length against wine ratings</figcaption>
 </figure>
 

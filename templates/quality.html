@@ -1,80 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
-    <title>Quality of This Data</title>
+{% extends "templates/layout.html" %}
 
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap theme -->
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="css/theme.css" rel="stylesheet">
-</head>
+{% set active_page = "quality" %}
 
-<body role="document">
+{% block jumbotron %}
+    <h1>Quality of This Dataset</h1>
+    <p>Completeness, coherence, correctness</p>
+{% endblock %}
 
-<!-- Fixed navbar -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <a class="navbar-brand" href="#">Data Exploratory Byte</a>
-    <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <li>
-                <a href="/">Home</a>
-            </li>
-            <li class="active">
-                <a href="quality">Data Quality</a>
-            </li>
-        </ul>
-    </div><!--/.nav-collapse -->
-</nav>
+{% block content %}
+    <h2>Intro</h2>
+    <hr>
 
-<div class="jumbotron">
-    <div class="container">
-        <h1>Quality of This Dataset</h1>
-        <p>Completeness, coherence, correctness</p>
-    </div>
-</div>
+    <p>
+        The wine review dataset is complete in the sense that it can answer a couple of interesting questions,
+        for example, how to predict wine price based on wine ratings.
+        By examining the summary statistics of columns of interest, the dataset is coherent in spite of
+        some reviews which have missing fields. The correctness of the dataset depends on the study population,
+        for example, the dataset only contains wine with ratings greater than or equal to 80.
+    </p>
 
-<main role="main">
-    <div class="container">
-       <div class="page-header">
-        <h2>Intro</h2>
-    </div>
-        <p>
-            The wine review dataset is complete in the sense that it can answer a couple of interesting questions,
-            for example, how to predict wine price based on wine ratings.
-            By examining the summary statistics of columns of interest, the dataset is coherent in spite of
-            some reviews which have missing fields. The correctness of the dataset depends on the study population,
-            for example, the dataset only contains wine with ratings greater than or equal to 80.
-        </p>
+    <p><a href="https://github.com/weitian-ding/05839-byte2/blob/master/notebooks/Wine%20Review%20EDA.ipynb">Here</a>
+        is my source code for the data exploratory analysis.</p>
 
-        <p><a href="">Here</a> is my source code for the data exploratory analysis.</p>
-
-        {% include 'templates/completeness.html' %}
-        {% include 'templates/coherence.html' %}
-        {% include 'templates/correctness.html' %}
-    </div>
-
-</main>
-
-<hr>
-
-<footer class="container">
-         <p><a href = "mailto: weitiand@andrew.cmu.edu">weitiand</a></p>
-</footer>
-
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="js/jquery-1.11.3.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/docs.min.js"></script>
-</body>
-</html>
+    {% include 'templates/completeness.html' %}
+    {% include 'templates/coherence.html' %}
+    {% include 'templates/correctness.html' %}
+{% endblock %}
