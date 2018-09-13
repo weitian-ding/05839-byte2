@@ -1,0 +1,200 @@
+<div class="page-header">
+    <h2>Is the data coherent?</h2>
+</div>
+
+<p>
+    The dataset is coherent, we can look at some statistics for each column.
+    Wine price and rating are two numeric fields in the dataset (see table 2).
+    Wine price is highly skewed (see figure 8), while wine ratings follow a normal distribution
+    (see figure 9, here we see wine rating as a continuous random variable). We see that there are
+    high-end wines which are priced over $3,000 (see table 2), but this is still within a reasonable
+    price range. We can also examine wine variety.
+</p>
+
+<table class="table table-condensed">
+    <caption>Table 2: summary statistics for wine price and ratings</caption>
+    <thead>
+    <tr>
+        <th scope="col"></th>
+        <th scope="col">wine ratings</th>
+        <th scope="col">wine price</th>
+        <th scope="col">number of reviews per variety</th>
+        <th scope="col">number of reviews per country</th>
+        <th scope="col">number of reviews per taster</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">counts (discrete variables)</th>
+        <td>NA</td>
+        <td>NA</td>
+        <td>675</td>
+        <td>43</td>
+        <td>15</td>
+    </tr>
+    <tr>
+        <th scope="row">mean</th>
+        <td>88.45</td>
+        <td>35.36</td>
+        <td>192.55</td>
+        <td>3021.12</td>
+        <td>6583.87</td>
+    </tr>
+    <tr>
+        <th scope="row">std</th>
+        <td>3.04</td>
+        <td>41.02</td>
+        <td>1014.83</td>
+        <td>9238.95</td>
+        <td>6842.92</td>
+    </tr>
+    <tr>
+        <th scope="row">min</th>
+        <td>80</td>
+        <td>4</td>
+        <td>1</td>
+        <td>1</td>
+        <td>6</td>
+    </tr>
+    <tr>
+        <th scope="row">25%</th>
+        <td>86</td>
+        <td>17</td>
+        <td>2</td>
+        <td>12</td>
+        <td>1460</td>
+    </tr>
+    <tr>
+        <th scope="row">50%</th>
+        <td>88</td>
+        <td>25</td>
+        <td>6</td>
+        <td>86</td>
+        <td>4966</td>
+    </tr>
+    <tr>
+        <th scope="row">75%</th>
+        <td>91</td>
+        <td>42</td>
+        <td>30</td>
+        <td>1410</td>
+        <td>9534.5</td>
+    </tr>
+    <tr>
+        <th scope="row">max</th>
+        <td>100</td>
+        <td>3300</td>
+        <td>13272</td>
+        <td>54504</td>
+        <td>25514</td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="row">
+
+    <div class="col-md-4">
+        <figure class="figure">
+            <div class="text-center">
+                <img src="img/ratings_qq.png" height="350" class="figure-img img-fluid"
+                     alt="wine ratings Q-Q plot">
+            </div>
+            <figcaption class="figure-caption">Figure 8: wine ratings Q-Q plot</figcaption>
+        </figure>
+    </div>
+
+    <div class="col-md-8">
+        <figure class="figure">
+            <div class="text-center">
+                <img src="img/price_hist.png" height="350" class="figure-img img-fluid"
+                     alt="wine price hist">
+            </div>
+            <figcaption class="figure-caption">Figure 9: wine price (<=$100) histogram</figcaption>
+        </figure>
+    </div>
+</div>
+
+<hr>
+
+<p>
+    We count the number of reviews for each wine variety in
+    the dataset (see table 10), and we find that there are few wine varieties which contribute to the
+    bulk of wine reviews. We can illustrate this by plotting the number of wine reviews
+    for each variety in sorted by the number of wine reviews (see figure 10), we see a long-tailed
+    distribution. We can also do the same to the country where a wine is produced (see table *, figure 11),
+    and we find that most wine reviews are for American, French and Italian wine.
+</p>
+
+<div class="row">
+    <div class="col-md-6">
+        <figure class="figure">
+            <div class="text-center">
+                <img src="img/variety_dist.png" width="100%" class="figure-img img-fluid"
+                     alt="wine price hist">
+            </div>
+            <figcaption class="figure-caption">Figure 10: number of reviews against wine variety
+            </figcaption>
+        </figure>
+    </div>
+
+    <div class="col-md-6">
+        <figure class="figure">
+            <div class="text-center">
+                <img src="img/country_dist.png" width="100%" class="figure-img img-fluid"
+                     alt="wine price hist">
+            </div>
+            <figcaption class="figure-caption">Figure 11: number of reviews against wine country
+            </figcaption>
+        </figure>
+    </div>
+</div>
+
+<hr>
+
+<p>
+    Next, we look at the actual text of wine reviews. Using word cloud, we see the frequently appearing
+    word n-gram in the wine review corpus are “black cherry”, “drink now”, “fruit flavor” and “full-bodied”
+    (see figure 12),
+    which makes sense since they are all topically related to wine. We can also look at the length
+    of wine reviews (see figure 13). For each wine rating bucket, we plot a box plot of wine
+    review length. Interestingly, we find that positive wine reviews are generally longer
+    than less positive ones (see figure 14).
+</p>
+
+<div class="row">
+    <div class="col-md-6">
+        <figure class="figure">
+            <div class="text-center">
+                <img src="img/word_cloud.png"
+                     class="figure-img img-fluid"
+                     height="400"
+                     alt="wine price hist">
+            </div>
+            <figcaption class="figure-caption">Figure 12: word cloud wine description visualization</figcaption>
+        </figure>
+    </div>
+    <div class="col-md-6">
+        <figure class="figure">
+            <div class="text-center">
+                <img src="img/review_wc_hist.png"
+                     class="figure-img img-fluid"
+                     height="400"
+                     alt="wine price hist">
+            </div>
+            <figcaption class="figure-caption">Figure 13: review length histogram</figcaption>
+        </figure>
+    </div>
+</div>
+
+<hr>
+
+<figure class="figure">
+    <div class="text-center">
+        <img src="img/ratings_wc_box.png"
+             class="figure-img img-fluid"
+             width="80%"
+             alt="wine price hist">
+    </div>
+    <figcaption class="figure-caption">Figure 14: review length against wine ratings</figcaption>
+</figure>
+

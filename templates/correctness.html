@@ -1,0 +1,65 @@
+<div class="page-header">
+    <h2>Is the data correct?</h2>
+</div>
+
+<p>
+    If we want to study the wine all over the world, the wine review dataset is biased.
+    The sampling error comes from the fact that the dataset is scraped from
+    <a href="https://www.wineenthusiast.com">WineEnthusiast</a>.
+    <a href="https://www.wineenthusiast.com">WineEnthusiast</a> only includes wine with ratings greater
+    than or equal to 80, which means that the sample is biased towards higher
+    customer satisfaction wine.
+</p>
+
+<p>
+    We can also look at where the wine is produced (see FustionTable below). For an unbiased dataset,
+    the sample distribution of wine origin locations should reflect the true distribution of wineries
+    all over the world, but it would require some domain knowledge in wine to make a judgment on this.
+    Also, there can be measurement errors. The ratings are provided by WineEnthusiast.com tasters.
+</p>
+
+
+<figure class="figure">
+    <div class="text-center">
+        <iframe width="100%" height="500" scrolling="no" frameborder="no"
+                src="https://fusiontables.google.com/embedviz?q=select+col7+from+1mgXxm5FFPDs_1bAvwYBGXP1iI-n01tT1G0wTKMQ9&amp;viz=MAP&amp;h=false&amp;lat=42.261049162113856&amp;lng=9.11865234375&amp;t=1&amp;z=5&amp;l=col7&amp;y=2&amp;tmplt=2&amp;hml=ONE_COL_LAT_LNG"></iframe>
+    </div>
+    <figcaption class="figure-caption">FusionTable 1: wine rating locations</figcaption>
+</figure>
+
+<hr>
+
+<div class="row">
+    <div class="col-md-6">
+        <p>
+            There are 15 tasters in the dataset (see table 2). FusionTable 2 shows a network graph between
+            wine varieties
+            and wine tasters, and we can see that there are some major contributors like @vossroger. Figure 15 shows
+            the wine ratings given by different tasters, we can see some difference in summary statistics.
+            This can be due to different tasters having different expertise and they specialize in certain varieties.
+            But there could also be noise in wine ratings introduced by pressure from wine producers or different
+            standards between wine tasters. The wine tasting process itself can also introduce measurement errors,
+            for example, a bad sample of wine is provided.
+        </p>
+    </div>
+    <div class="col-md-6">
+        <figure class="figure">
+            <div class="text-center">
+                <img src="img/wine_ratings_taster_box.png" width="100%" class="figure-img img-fluid"
+                     alt="wine ratings v.s. black cherry">
+            </div>
+            <figcaption class="figure-caption">Figure 15: wine ratings based on wine tasters</figcaption>
+        </figure>
+    </div>
+</div>
+
+<hr>
+
+<figure class="figure">
+    <div class="text-center">
+    <iframe width="1000" height="500" scrolling="no" frameborder="no" src="https://fusiontables.google.com/embedviz?containerId=googft-gviz-canvas&amp;viz=GVIZ&amp;t=GRAPH&amp;gc=true&amp;gd=false&amp;sdb=1&amp;rmax=100000&amp;q=select+col10%2C+col12%2C+col4+from+1mgXxm5FFPDs_1bAvwYBGXP1iI-n01tT1G0wTKMQ9&amp;qrs=+where+col10+%3E%3D+&amp;qre=+and+col10+%3C%3D+&amp;qe=&amp;uiversion=2&amp;state=%7B%22ps%22%3A%221_4_-f_1_2_25_2_0_1q_-18_q_n_-8_1_q_-p_4g_m_c_5r_-1_-14_26_18_-l_3_g_-1b_a_x_-14_5_-h_-16_5q_5_e_7_j_r_b_1g_l_n_3_-1o_c_13_2_5s_-2_-d_16_-3_-r_g_17_1m_r_1g_6_e_9_-2_2w_9_-k_5n_1_15_5t_-14_-r_1p_2b_-1e_9_2y_9_x_z_j_2i_13_-6_f_j_-1v_50_1z_-22_k_1r_-k_1j_1g_x_2z_1u_x_h_1y_1e_1m_1_t_8_31_-7_5v_2j_v_l_x_-1p_1n_-1b_8_5i_2z_k_1b_1f_-6_w_o_17_1t_-q_-1o_19_26_-i_78_-1i_3_31_-1p_-a_46_-v_-r_6p_-9_1i_13_2q_13_3l_-i_-1q_70_-1g_n_6_2p_-1j_5u_2j_-1y_d_29_-2a_3m_1b_-2j_i_6_1m_4v_m_1n_6f_-r_1u_5x_5_21_36_-k_1f_7c_20_-2i_4e_1m_1q_5w_1a_e_6i_39_1a_4m_1x_-1u_79_1h_1z_6q_-2a_-o_5l_-5_-1p_14_-x_12_2p_-4_-2k_8x_-28_1_5z_y_-2b_6b_-27_-1c_6t_-1j_22_j_-12_t_1a_x_1q_6d_-1l_-16_62_-q_21_22_3_-2r_7p_34_-2q_66_-29_-u_7i_2_-2k_5p_-17_16_60_-1_27_6o_-n_-1j_83_21_2j_6e_-e_2b_6g_-a_-2i_1e_3m_e_7x_-10_-21_p_-1q_-2i_8e_-9_2n_29_2v_-17_4b_-1d_-7_6v_24_-2e_6n_-24_m_6c_-24_-12_8j_-2d_-3_2a_2m_-1q_6h_-20_-1j_7n_-r_-2e_7f_40_-2p_2b_2t_-1d_77_3d_-2s_8g_-v_-26_6u_-27_1f_55_2d_-24_1u_17_2r_7e_-h_2m_4l_1s_1w_6r_-26_e_3u_4n_12_86_-u_2a_3a_1o_1g_7o_4r_-1l_6x_-z_2k_3e_2u_r_1r_4r_-i_90_3b_-1e_2u_-1r_20_9f_-26_2g_5m_-27_7_20_-r_19_8o_10_2a_76_-1q_-x_2k_t_2a_12_5c_t_15_3o_r_1g_-17_-2m_48_-1h_-1d_7k_-1l_-2d_bd_2j_1x_27_51_-1j_3g_-1z_6_7d_-20_-5_61_-2i_1k_3h_-19_11_ad_28_2c_8a_2m_1s_7z_x_-2l_ao_52_-o_2x_31_-m_6z_-16_s_67_-1r_-o_a0_-2w_t_2m_1c_2v_8l_1d_24_51_32_-h_1y_30_t_b1_-3w_-h_69_d_-2o_25_3z_-2j_5j_2h_-2s_t_-1g_-2r_an_-1q_-1t_2e_5l_h_u_-1i_2g_30_h_1t_97_-2d_1a_2f_-1q_-i_a2_-1e_2n_7v_-20_-22_2g_-1r_-1c_1d_1t_2i_7u_-1i_-2n_2%22%2C%22cx%22%3A74.52322695935398%2C%22cy%22%3A-22.3416775396971%2C%22sw%22%3A601.285098716084%2C%22sh%22%3A261.2398561263196%2C%22z%22%3A0.9824465562334648%7D&amp;gco_forceIFrame=true&amp;gco_hasLabelsColumn=true&amp;width=1000&amp;height=500">
+    </iframe>
+    </div>
+    <figcaption class="figure-caption">FusionTable 2: wine tasting network
+        graph between tasters and wine variety</figcaption>
+</figure>

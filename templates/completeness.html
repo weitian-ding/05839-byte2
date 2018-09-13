@@ -1,0 +1,197 @@
+<div class="container">
+
+    <div class="page-header">
+        <h2>Is the data complete?</h2>
+    </div>
+
+    <div>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Is there missing data or reporting error?</h3>
+                <p>Since the wine review data is scraped from a website,
+                    <a href="https://www.wineenthusiast.com">WineEnthusiast</a>,
+                    there could be missing fields
+                    due to missing fields on <a href="https://www.wineenthusiast.com">WineEnthusiast</a>
+                    or scrapping errors. Table 1 shows
+                    the number of NA values for the columns of interest out of 129,971 wine reviews.
+                    Since the rows with one or
+                    more missing values consist only a small fraction of the wine reviews scraped,
+                    we simply drop the rows with NA values in the following analysis.
+                </p>
+
+                <p>
+                    Also, since <a href="https://www.wineenthusiast.com">WineEnthusiast</a>
+                    scrapping can introduce junk values due to irregularities in the website UI, more on this in the
+                    data coherence section.
+                </p>
+            </div>
+
+            <div class="col-md-6">
+                <table class="table table-condensed">
+                    <caption>Table 1: NA counts for columns of interest</caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">column name</th>
+                        <th scope="col">NA counts</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">origin country</th>
+                        <td>63</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">wine price</th>
+                        <td>8996</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">wine variety</th>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">wine ratings</th>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">wine taster</th>
+                        <td>31213</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">wine review title</th>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">wine review text</th>
+                        <td>0</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h3>Is the data appropriate?</h3>
+
+        <p>
+            The wine review dataset can help to answer a number of questions.
+            Say, we want to infer the price of wine using other features like ratings and country.
+            Since the ratings of wine is a discrete random variable (it is always a multiple of 2.5),
+            for each wine rating bucket, we can plot a box plot of wine price (see figure 1).
+            In general, we see a weak linear relationship between wine rating and wine price:
+            the higher the rating is, the more expensive the wine gets.
+        </p>
+
+        <figure class="figure">
+            <div class="text-center">
+                <img src="img/price_rating_box.png" width="80%" class="figure-img img-fluid"
+                     alt="wine price v.s. ratings">
+            </div>
+            <figcaption class="figure-caption">Figure 1: wine price against wine ratings</figcaption>
+        </figure>
+
+        <hr>
+
+        <p>
+            Another example is that we want to predict wine variety using features like wine price,
+            producing country, ratings, and description.
+            For top 10 most-frequently reviewed wine varieties, we plot box plots of wine price (see figure 2).
+            We see that different wine varieties have slightly different summary statistics.
+            For example, Cabernet Sauvignon seems to produce higher-end wine, but Chardonnary is inexpensive
+            in general with the third quantile below $40.
+            We can also look at how wine variety influences wine ratings (see figure 3).
+            We see that wine ratings seem to have similar summary statistics across wine variety and thus wine
+            rating may not be a strong indicator of wine variety.
+        </p>
+
+        <p>Alternatively, we can examine how wine produced in different countries differ.
+            Figure 4 shows that the price of wine has a different summary statistics in different countries,
+            and figure 5 shows that the country where wine is produced does not seem to
+            influence wine rating by too much.
+        </p>
+
+        <div class="row">
+            <div class="col-md-6">
+                <figure class="figure">
+                    <div class="text-center">
+                        <img src="img/price_variety_box.png" width="100%" class="figure-img img-fluid"
+                             alt="wine price v.s. ratings">
+                    </div>
+                    <figcaption class="figure-caption">Figure 2: wine price against wine variety</figcaption>
+                </figure>
+            </div>
+
+            <div class="col-md-6">
+                <figure class="figure">
+                    <div class="text-center">
+                        <img src="img/rating_variety_box.png" width="100%" class="figure-img img-fluid"
+                             alt="wine price v.s. ratings">
+                    </div>
+                    <figcaption class="figure-caption">Figure 3: wine ratings against wine variety</figcaption>
+                </figure>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-6">
+                <figure class="figure">
+                    <div class="text-center">
+                        <img src="img/price_country_box.png" width="100%" class="figure-img img-fluid"
+                             alt="wine price v.s. variety">
+                    </div>
+                    <figcaption class="figure-caption">Figure 4: wine price against wine country</figcaption>
+                </figure>
+            </div>
+
+            <div class="col-md-6">
+                <figure class="figure">
+                    <div class="text-center">
+                        <img src="img/rating_country_box.png" width="100%" class="figure-img img-fluid"
+                             alt="wine ratings v.s. variety">
+                    </div>
+                    <figcaption class="figure-caption">Figure 5: wine ratings against wine country</figcaption>
+                </figure>
+            </div>
+        </div>
+
+        <hr>
+
+        <p> We can also train predictive models using the text description in wine reviews.
+            Using word cloud, we found that “black cherry” is one of the frequently appearing word n-gram
+            in the wine review corpus. We can categorize wine reviews into two groups based on whether
+            they contain the word “black cherry”, and plot boxplots of
+            wine price and rating (see figure 6 and figure 7).
+            We see different summary statistics in these two wine review groups which suggest
+            the word "black cherry" has some predictive power over wine price and ratings.
+        </p>
+
+        <div class="row">
+            <div class="col-md-6">
+                <figure class="figure">
+                    <div class="text-center">
+                        <img src="img/price_cherry.png" width="75%" class="figure-img img-fluid"
+                             alt="wine price v.s. black cherry">
+                    </div>
+                    <figcaption class="figure-caption">Figure 6: wine price</figcaption>
+                </figure>
+            </div>
+
+            <div class="col-md-6">
+                <figure class="figure">
+                    <div class="text-center">
+                        <img src="img/ratings_cherry.png" width="75%" class="figure-img img-fluid"
+                             alt="wine ratings v.s. black cherry">
+                    </div>
+                    <figcaption class="figure-caption">Figure 7: wine ratings</figcaption>
+                </figure>
+            </div>
+
+        </div>
+
+        <hr>
+
+    </div>
+
+</div>

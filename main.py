@@ -7,14 +7,11 @@
 # Licensed under GPL v3 (http://www.gnu.org/licenses/gpl.html)
 #
 
+import logging
 # Imports
 import os
-import jinja2
-import webapp2
-import logging
-import json
-import urllib
 
+import jinja2
 # this is used for constructing URLs to google's APIS
 from googleapiclient.discovery import build
 
@@ -24,34 +21,31 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     autoescape=True)
 
 # This API key is provided by google as described in the tutorial
-API_KEY = 'XXxxXxXXXXxxNXXxXXXxxxNNXXxxxxxxxXXXxXX'
+API_KEY = 'AIzaSyC2Zp2wa92kkmM_h0uMUAR0-mqPAXQd_00'
 
 # This uses discovery to create an object that can talk to the 
 # fusion tables API using the developer key
 service = build('fusiontables', 'v1', developerKey=API_KEY)
 
 # This is the table id for the fusion table
-TABLE_ID = 'NxxxNXxXxxNxXXXXNXxXXXxXxxxNxXxNxXxxXxxX'
+TABLE_ID = '1mgXxm5FFPDs_1bAvwYBGXP1iI-n01tT1G0wTKMQ9'
 
 # This is the default columns for the query
 query_cols = []
 query_values = ['Forlan'] #Change to be the value(s) you're querying in the column you've specified
 
 # Import the Flask Framework
-from flask import Flask, request
+from flask import Flask
+
 app = Flask(__name__)
 
+
 def get_all_data(query):
-    #Example from the assignment instructions
-    #query = "SELECT * FROM " + TABLE_ID + " WHERE  Scorer = 'Forlan' LIMIT 2"
-    #response = service.query().sql(sql=query).execute()
-    #logging.info(response['columns'])
-    #logging.info(response['rows'])
-    
     response = service.query().sql(sql=query).execute()
     logging.info(response['columns'])
     logging.info(response['rows'])
     return response
+
 
 # make a query given a set of columns to retrieve
 def make_query(cols, values, limit):
@@ -71,49 +65,34 @@ def make_query(cols, values, limit):
     string_values = string_values[2:len(string_values)]
     
     #Change this query to have your corresponding column (in our soccer example, the column for our WHERE is Scorer).
-    query = "SELECT " + string_cols + " FROM " + TABLE_ID + " WHERE Scorer = '" + string_values + "'"
-
-    query = query + " LIMIT " + str(limit)
+    query = 'SELECT variety, country, title, description, price_in_usd, ratings, taster_twitter_handle as taster FROM %s' % TABLE_ID
+    query = "%s LIMIT %s" % (query, str(limit))
 
     logging.info(query)
-    # query = "SELECT * FROM " + TABLE_ID + " WHERE  Scorer = 'Forlan' LIMIT 5"
 
     return query
-    
-# Note: We don't need to call run() since our application is embedded within
-# the App Engine WSGI application server.
+
 
 @app.route('/')
 def index():
     template = JINJA_ENVIRONMENT.get_template('templates/index.html')
     request = service.column().list(tableId=TABLE_ID)
-    res = get_all_data(make_query([], query_values, 5)) #5 is our limit we're passing in
+    res = get_all_data(make_query([], query_values, 20)) #5 is our limit we're passing in
     logging.info('allheaders')
-    return template.render(columns=res['columns'], rows = res['rows'] )
+    return template.render(columns=res['columns'], rows = res['rows'])
 
-@app.route('/_update_table', methods=['POST']) 
-def update_table():
-    logging.info(request.get_json())
-    cols = request.json['cols']
-    logging.info(cols)
-    result = get_all_data(make_query(cols, query_values, 100))
-    logging.info(result)
-    return json.dumps({'content' : result['rows'], 'headers' : result['columns']})
-
-@app.route('/about')
-def about():
-    template = JINJA_ENVIRONMENT.get_template('templates/about.html')
-    return template.render()
 
 @app.route('/quality')
 def quality():
     template = JINJA_ENVIRONMENT.get_template('templates/quality.html')
     return template.render()
 
+
 @app.errorhandler(404)
 def page_not_found(e):
     """Return a custom 404 error."""
     return 'Sorry, Nothing at this URL.', 404
+
 
 @app.errorhandler(500)
 def application_error(e):
